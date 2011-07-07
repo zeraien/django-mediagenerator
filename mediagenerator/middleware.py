@@ -7,6 +7,8 @@ if MEDIA_DEV_MODE:
     from django.utils.http import http_date
     import time
 
+_REFRESH_DEV_NAMES_DONE = False
+
 class MediaMiddleware(object):
     """
     Middleware for serving and browser-side caching of media files.
@@ -23,9 +25,12 @@ class MediaMiddleware(object):
         if not MEDIA_DEV_MODE:
             return
 
-        # We refresh the dev names only once for the whole request, so all
+        # We refresh the dev names only once for the server execution, so all
         # media_url() calls are cached.
-        _refresh_dev_names()
+        global _REFRESH_DEV_NAMES_DONE
+        if not _REFRESH_DEV_NAMES_DONE:
+            _refresh_dev_names()
+            _REFRESH_DEV_NAMES_DONE = True
 
         if not request.path.startswith(DEV_MEDIA_URL):
             return
