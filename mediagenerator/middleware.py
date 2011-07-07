@@ -30,7 +30,7 @@ class MediaMiddleware(object):
         # This allows for every "page load" to go very quickly, but does not require a
         # server restart to get new file paths and versions.
         global _REFRESH_DEV_NAMES_DONE_AT
-        if (_REFRESH_DEV_NAMES_DONE_AT + 30) < time.time():
+        if (_REFRESH_DEV_NAMES_DONE_AT + 15) < time.time():
             _refresh_dev_names()
             _REFRESH_DEV_NAMES_DONE_AT = time.time()
 
