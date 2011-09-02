@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from django.utils.http import urlquote
+from django.utils.encoding import smart_str
 import os
 import re
 
@@ -125,7 +126,7 @@ def read_text_file(path):
     fp = open(path, 'r')
     output = fp.read()
     fp.close()
-    return output.decode('utf8')
+    return smartstr(output)
 
 def load_backend(backend):
     if backend not in _backends_cache:
