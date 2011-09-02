@@ -126,7 +126,7 @@ def read_text_file(path):
     fp = open(path, 'r')
     output = fp.read()
     fp.close()
-    return smartstr(output)
+    return smart_str(output)
 
 def load_backend(backend):
     if backend not in _backends_cache:
